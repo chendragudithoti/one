@@ -3,12 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NexusShop · friendly &amp; modern</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
+    <title>FlowBoard · task manager</title>
+    <!-- fonts & icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ----- reset & root ----- */
         * {
             margin: 0;
             padding: 0;
@@ -16,38 +15,34 @@
         }
 
         :root {
-            --bg: #f7f6f2;
+            --bg: #f5f4f0;
             --card: #ffffff;
-            --text: #1f1f2e;
-            --text-muted: #5a5a6e;
-            --accent: #d17a5a;
-            --accent-soft: #f5e1d8;
-            --accent-dark: #b55a3e;
-            --border-light: #e8e6e0;
-            --shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.07);
-            --radius: 20px;
-            --radius-sm: 12px;
-            --container: 1220px;
-            --transition: 0.25s ease;
+            --text: #1c1c28;
+            --text-muted: #5e5e72;
+            --accent: #6c5b7b;
+            --accent-light: #e4dcec;
+            --accent-dark: #4f405c;
+            --border: #e3dfd8;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.07);
+            --radius: 18px;
+            --radius-sm: 10px;
+            --container: 1120px;
+            --transition: 0.2s ease;
         }
 
         body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         button {
@@ -58,33 +53,63 @@
             color: inherit;
         }
 
-        .container {
-            max-width: var(--container);
-            margin: 0 auto;
-            padding: 0 20px;
+        input,
+        textarea {
+            font-family: inherit;
         }
 
-        /* ----- utilities ----- */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
+        /* ----- header ----- */
+        header {
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 0;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.3px;
+        }
+
+        .brand i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .brand .accent {
+            color: var(--accent);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
-            padding: 12px 28px;
+            padding: 10px 22px;
             border-radius: 60px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: var(--transition);
             border: 2px solid transparent;
         }
@@ -99,1025 +124,464 @@
             background: var(--accent-dark);
             border-color: var(--accent-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(209, 122, 90, 0.25);
+            box-shadow: 0 8px 20px rgba(108, 91, 123, 0.25);
         }
 
-        .btn-secondary {
-            background: var(--text);
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--border);
+        }
+
+        .btn-danger {
+            background: #d45a5a;
             color: #fff;
-            border-color: var(--text);
+            border-color: #d45a5a;
         }
 
-        .btn-secondary:hover {
-            background: #2e2e44;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .btn-outline-light {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .btn-outline-light:hover {
-            background: rgba(255, 255, 255, 0.22);
-            transform: translateY(-2px);
+        .btn-danger:hover {
+            background: #b54444;
+            border-color: #b54444;
         }
 
         .btn-sm {
-            padding: 8px 18px;
-            font-size: 0.85rem;
-        }
-
-        /* ----- header ----- */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 10px 0;
-            min-height: 66px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 800;
-            font-size: 1.3rem;
-            letter-spacing: -0.3px;
-        }
-
-        .brand i {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
-        .brand .accent {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: var(--border-light);
-            color: var(--text);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .icon-btn {
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border-radius: 60px;
-            color: var(--text-muted);
-            transition: var(--transition);
-            font-size: 1.1rem;
-        }
-
-        .icon-btn:hover {
-            background: var(--border-light);
-            color: var(--text);
-        }
-
-        .cart-wrap {
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: var(--accent);
-            color: #fff;
-            font-size: 0.7rem;
-            font-weight: 700;
-            width: 20px;
-            height: 20px;
-            border-radius: 30px;
-            display: grid;
-            place-items: center;
-            border: 2px solid #fff;
-        }
-
-        .search-wrap {
-            display: flex;
-            align-items: center;
-            background: var(--border-light);
-            border-radius: 60px;
-            padding: 0 12px 0 18px;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            min-width: 180px;
-        }
-
-        .search-wrap:focus-within {
-            border-color: var(--accent);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(209, 122, 90, 0.08);
-        }
-
-        .search-wrap input {
-            border: 0;
-            background: transparent;
-            outline: none;
-            width: 100%;
-            padding: 10px 0;
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-
-        .search-wrap input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-wrap button {
-            padding: 6px 0 6px 8px;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .search-wrap button:hover {
-            color: var(--accent);
-        }
-
-        .mobile-toggle {
-            display: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 60px;
-            background: var(--border-light);
-            font-size: 1.2rem;
-        }
-
-        #mobileMenu {
-            display: none;
-            background: #fff;
-            border-top: 1px solid var(--border-light);
-            padding: 12px 0 18px;
-        }
-
-        #mobileMenu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        #mobileMenu ul a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            color: var(--text);
-            transition: var(--transition);
-        }
-
-        #mobileMenu ul a:hover {
-            background: var(--bg);
-        }
-
-        #mobileMenu ul a i {
-            width: 24px;
-            color: var(--text-muted);
-        }
-
-        /* ----- hero ----- */
-        .hero {
-            position: relative;
-            background: linear-gradient(135deg, #1f1f2e 0%, #34344e 100%);
-            border-radius: var(--radius);
-            margin: 16px 20px 0;
-            padding: 56px 0;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-            opacity: 0.25;
-            z-index: 0;
-        }
-
-        .hero .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero .tag {
-            display: inline-block;
-            background: rgba(209, 122, 90, 0.18);
-            color: var(--accent);
-            padding: 4px 18px;
-            border-radius: 60px;
-            font-weight: 600;
+            padding: 6px 16px;
             font-size: 0.8rem;
-            letter-spacing: 0.4px;
-            margin-bottom: 14px;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1.1;
-            max-width: 600px;
-            margin-bottom: 12px;
-        }
-
-        .hero p {
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 460px;
-            margin-bottom: 24px;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .hero .actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        /* ----- section ----- */
-        .section {
-            padding: 48px 0;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-
-        .section-header .title-group h2 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-
-        .section-header .title-group p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 2px;
-        }
-
-        .section-header .view-all {
-            font-weight: 600;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-
-        .section-header .view-all:hover {
-            gap: 12px;
-            color: var(--accent-dark);
-        }
-
-        /* ----- categories ----- */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 16px;
-        }
-
-        .cat-card {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 22px 12px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-
-        .cat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-soft);
-        }
-
-        .cat-card .icon-wrap {
-            width: 54px;
-            height: 54px;
-            border-radius: 60px;
-            background: var(--accent-soft);
-            display: grid;
-            place-items: center;
-            margin: 0 auto 10px;
-            font-size: 1.4rem;
-            color: var(--accent);
-            transition: var(--transition);
-        }
-
-        .cat-card:hover .icon-wrap {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .cat-card h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .cat-card .count {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* ----- products ----- */
-        .products-grid {
+        /* ----- stats ----- */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 16px;
+            margin: 24px 0 28px;
         }
 
-        .product-card {
+        .stat-card {
             background: var(--card);
             border-radius: var(--radius);
-            overflow: hidden;
+            padding: 18px 20px;
             box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent-soft);
-        }
-
-        .product-card .img-wrap {
-            position: relative;
-            background: var(--bg);
-            aspect-ratio: 1/1;
-            overflow: hidden;
-        }
-
-        .product-card .img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .product-card:hover .img-wrap img {
-            transform: scale(1.04);
-        }
-
-        .product-card .badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: var(--accent);
-            color: #fff;
-            padding: 4px 14px;
-            border-radius: 60px;
-            font-size: 0.7rem;
-            font-weight: 700;
-        }
-
-        .product-card .badge.sale {
-            background: #e9b45a;
-            color: var(--text);
-        }
-
-        .product-card .wish-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 36px;
-            height: 36px;
-            border-radius: 60px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            display: grid;
-            place-items: center;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .product-card .wish-btn:hover {
-            background: #fff;
-            color: var(--accent);
-            transform: scale(1.08);
-        }
-
-        .product-card .body {
-            padding: 14px 16px 8px;
-            flex: 1;
-        }
-
-        .product-card .body .category-tag {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-        }
-
-        .product-card .body h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 4px 0 6px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .product-card .body .price-row {
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .product-card .body .price {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .product-card .body .old-price {
-            color: var(--text-muted);
-            text-decoration: line-through;
-            font-size: 0.9rem;
-        }
-
-        .product-card .body .rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.8rem;
-            color: #f3a84b;
-            margin-top: 4px;
-        }
-
-        .product-card .body .rating span {
-            color: var(--text-muted);
-        }
-
-        .product-card .footer {
-            padding: 4px 16px 16px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .product-card .footer .add-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: var(--radius-sm);
-            background: var(--text);
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .product-card .footer .add-btn:hover {
-            background: var(--accent);
-            transform: scale(1.02);
-        }
-
-        .product-card .footer .add-btn.added {
-            background: #2a9d8f;
-        }
-
-        /* ----- deal ----- */
-        .deal-wrap {
-            display: flex;
-            background: var(--card);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .deal-wrap .deal-img {
-            flex: 0 0 46%;
-            min-height: 280px;
-            background: var(--bg);
-        }
-
-        .deal-wrap .deal-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .deal-wrap .deal-content {
-            flex: 1;
-            padding: 36px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .deal-wrap .deal-content .tag {
-            align-self: flex-start;
-            background: #e9b45a;
-            color: var(--text);
-            padding: 4px 16px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-
-        .deal-wrap .deal-content h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .deal-wrap .deal-content .desc {
-            color: var(--text-muted);
-            margin: 4px 0 12px;
-        }
-
-        .deal-wrap .deal-content .price-big {
-            font-size: 2rem;
-            font-weight: 800;
-        }
-
-        .deal-wrap .deal-content .price-big .old {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            text-decoration: line-through;
-            margin-left: 8px;
-        }
-
-        .deal-wrap .deal-content .stock {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin: 4px 0 14px;
-        }
-
-        .deal-wrap .deal-content .stock strong {
-            color: var(--accent);
-        }
-
-        .timer-grid {
-            display: flex;
-            gap: 12px;
-            margin: 12px 0 18px;
-        }
-
-        .timer-box {
-            background: var(--text);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .timer-box .num {
-            font-size: 1.4rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .timer-box .label {
-            font-size: 0.6rem;
-            opacity: 0.7;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* ----- testimonials ----- */
-        .testimonials-scroll {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding: 8px 4px 16px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .testimonials-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .testimonials-scroll::-webkit-scrollbar-thumb {
-            background: var(--accent-soft);
-            border-radius: 10px;
-        }
-
-        .testimonial-card {
-            flex: 0 0 300px;
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 24px 22px;
-            box-shadow: var(--shadow);
-            scroll-snap-align: start;
+            gap: 14px;
             transition: var(--transition);
         }
 
-        .testimonial-card:hover {
+        .stat-card:hover {
             box-shadow: var(--shadow-hover);
         }
 
-        .testimonial-card .stars {
-            color: #f3a84b;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .testimonial-card blockquote {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            font-style: italic;
-            margin-bottom: 12px;
-        }
-
-        .testimonial-card .author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .testimonial-card .author .avatar {
+        .stat-card .icon {
             width: 44px;
             height: 44px;
             border-radius: 60px;
-            object-fit: cover;
-            background: var(--bg);
+            background: var(--accent-light);
+            display: grid;
+            place-items: center;
+            color: var(--accent);
+            font-size: 1.2rem;
         }
 
-        .testimonial-card .author .name {
-            font-weight: 600;
-            font-size: 0.9rem;
+        .stat-card .info .num {
+            font-weight: 700;
+            font-size: 1.4rem;
         }
 
-        .testimonial-card .author .role {
-            font-size: 0.8rem;
+        .stat-card .info .label {
             color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
-        /* ----- newsletter ----- */
-        .newsletter-wrap {
-            background: linear-gradient(135deg, #1f1f2e, #34344e);
-            border-radius: var(--radius);
-            padding: 44px 48px;
-            color: #fff;
+        /* ----- task controls ----- */
+        .task-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .task-controls .search-wrap {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .newsletter-wrap .text h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .newsletter-wrap .text p {
-            opacity: 0.75;
-        }
-
-        .newsletter-wrap form {
-            display: flex;
-            gap: 10px;
-            flex: 1;
-            max-width: 440px;
-            flex-wrap: wrap;
-        }
-
-        .newsletter-wrap form input {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 60px;
+            padding: 0 16px;
             flex: 1;
             min-width: 180px;
-            padding: 14px 20px;
-            border-radius: 60px;
-            border: 0;
-            font-size: 0.95rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            outline: 2px solid transparent;
             transition: var(--transition);
         }
 
-        .newsletter-wrap form input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .task-controls .search-wrap:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(108, 91, 123, 0.08);
         }
 
-        .newsletter-wrap form input:focus {
-            outline-color: var(--accent);
-            background: rgba(255, 255, 255, 0.16);
+        .task-controls .search-wrap input {
+            border: 0;
+            background: transparent;
+            outline: none;
+            padding: 12px 0;
+            width: 100%;
+            font-size: 0.9rem;
+            color: var(--text);
         }
 
-        .newsletter-wrap form .btn {
+        .task-controls .search-wrap input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .task-controls .search-wrap button {
+            padding: 8px 0 8px 8px;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .task-controls .search-wrap button:hover {
+            color: var(--accent);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            color: var(--text-muted);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
         }
 
-        .newsletter-wrap form .btn:hover {
-            background: var(--accent-dark);
-            border-color: var(--accent-dark);
-        }
-
-        #newsletterMsg {
-            margin-top: 8px;
-            font-size: 0.9rem;
-            width: 100%;
-        }
-
-        /* ----- footer ----- */
-        footer {
-            margin-top: 12px;
-            padding: 40px 0 24px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 36px;
-            margin-bottom: 24px;
-        }
-
-        .footer-grid .brand-col .brand {
-            font-size: 1.2rem;
-            margin-bottom: 6px;
-        }
-
-        .footer-grid .brand-col p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            max-width: 280px;
-        }
-
-        .footer-grid .brand-col .socials {
+        /* ----- task list ----- */
+        .task-list {
             display: flex;
-            gap: 8px;
-            margin-top: 12px;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
         }
 
-        .footer-grid .brand-col .socials a {
-            width: 38px;
-            height: 38px;
+        .task-item {
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .task-item:hover {
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .task-item .check {
+            width: 24px;
+            height: 24px;
             border-radius: 60px;
-            background: var(--border-light);
+            border: 2px solid var(--border);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+            background: #fff;
+        }
+
+        .task-item .check.done {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .task-item .task-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .task-item .task-body .title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .task-item .task-body .title.done {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .task-item .task-body .meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .task-item .task-body .meta i {
+            margin-right: 4px;
+        }
+
+        .task-item .task-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .task-item .task-actions button {
+            width: 34px;
+            height: 34px;
+            border-radius: 60px;
             display: grid;
             place-items: center;
             color: var(--text-muted);
             transition: var(--transition);
         }
 
-        .footer-grid .brand-col .socials a:hover {
-            background: var(--accent);
-            color: #fff;
+        .task-item .task-actions button:hover {
+            background: var(--border);
+            color: var(--text);
         }
 
-        .footer-grid .col h5 {
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+        .task-item .task-actions .delete-btn:hover {
+            background: #fde8e8;
+            color: #d45a5a;
         }
 
-        .footer-grid .col ul {
-            list-style: none;
+        .priority-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 60px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: var(--border);
+            color: var(--text-muted);
+        }
+
+        .priority-badge.high {
+            background: #fde8e8;
+            color: #b54444;
+        }
+
+        .priority-badge.medium {
+            background: #fff0d6;
+            color: #b27a2e;
+        }
+
+        .priority-badge.low {
+            background: #dff0e6;
+            color: #2e7d5e;
+        }
+
+        /* ----- modal / add task ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            place-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: grid;
+        }
+
+        .modal {
+            background: var(--card);
+            max-width: 480px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12);
+            animation: modalIn 0.2s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal .modal-header {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .footer-grid .col ul a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        .modal .modal-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .modal .modal-header .close-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 60px;
+            display: grid;
+            place-items: center;
             transition: var(--transition);
-        }
-
-        .footer-grid .col ul a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-light);
             color: var(--text-muted);
+        }
+
+        .modal .modal-header .close-btn:hover {
+            background: var(--border);
+        }
+
+        .modal label {
+            font-weight: 500;
             font-size: 0.85rem;
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .modal input,
+        .modal select,
+        .modal textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+            transition: var(--transition);
+            color: var(--text);
+        }
+
+        .modal input:focus,
+        .modal select:focus,
+        .modal textarea:focus {
+            outline: 2px solid var(--accent);
+            border-color: transparent;
+        }
+
+        .modal textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        .modal .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal .form-row>* {
+            flex: 1;
+        }
+
+        .modal .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 6px;
+        }
+
+        /* ----- empty state ----- */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 2.8rem;
+            color: var(--border);
+            margin-bottom: 12px;
+        }
+
+        .empty-state h4 {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 4px;
         }
 
         /* ----- responsive ----- */
-        @media (max-width: 1000px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .categories-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         @media (max-width: 820px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .deal-wrap {
-                flex-direction: column;
-            }
-            .deal-wrap .deal-img {
-                flex: 0 0 200px;
-            }
-            .deal-wrap .deal-content {
-                padding: 28px;
-            }
-            .newsletter-wrap {
-                flex-direction: column;
-                text-align: center;
-                padding: 32px 24px;
-            }
-            .newsletter-wrap form {
-                max-width: 100%;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .search-wrap {
-                min-width: 140px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .nav-links {
-                display: none;
-            }
-            .mobile-toggle {
-                display: grid;
-                place-items: center;
-            }
-            .products-grid {
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 14px;
-            }
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .hero {
-                margin: 12px 12px 0;
-                padding: 32px 0;
-            }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            .section-header .title-group h2 {
-                font-size: 1.3rem;
-            }
-            .timer-box {
-                min-width: 48px;
-                padding: 6px 10px;
-            }
-            .timer-box .num {
-                font-size: 1.1rem;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .brand {
-                font-size: 1.1rem;
             }
             .header-inner {
-                flex-wrap: nowrap;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
             }
-            .search-wrap {
-                min-width: 100px;
-                padding: 0 8px 0 12px;
+            .header-actions {
+                justify-content: space-between;
             }
-            .search-wrap input {
-                font-size: 0.8rem;
-                padding: 8px 0;
+            .task-controls {
+                flex-direction: column;
             }
-            .icon-btn {
+            .task-controls .search-wrap {
+                min-width: unset;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-card {
+                padding: 14px;
+            }
+            .stat-card .icon {
                 width: 36px;
                 height: 36px;
                 font-size: 1rem;
             }
-            .cart-count {
-                width: 18px;
-                height: 18px;
-                font-size: 0.6rem;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .products-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .categories-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .hero {
-                margin: 8px 8px 0;
-                padding: 20px 0;
-            }
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-            .container {
-                padding: 0 12px;
-            }
-            .deal-wrap .deal-content {
-                padding: 18px 16px;
-            }
-            .deal-wrap .deal-img {
-                flex: 0 0 150px;
-            }
-            .newsletter-wrap {
-                padding: 20px 16px;
-            }
-            .product-card .body {
-                padding: 10px 10px 4px;
-            }
-            .product-card .body h5 {
-                font-size: 0.85rem;
-            }
-            .product-card .body .price {
-                font-size: 0.95rem;
-            }
-            .product-card .footer {
-                padding: 4px 10px 12px;
-            }
-            .product-card .footer .add-btn {
-                font-size: 0.75rem;
-                padding: 8px;
-            }
-            .cat-card {
-                padding: 14px 8px;
-            }
-            .cat-card .icon-wrap {
-                width: 44px;
-                height: 44px;
+            .stat-card .info .num {
                 font-size: 1.1rem;
             }
-            .cat-card h4 {
-                font-size: 0.8rem;
+            .task-item {
+                flex-wrap: wrap;
+                padding: 14px;
             }
-            .timer-box {
-                min-width: 40px;
-                padding: 4px 6px;
+            .task-item .task-actions {
+                margin-left: auto;
             }
-            .timer-box .num {
-                font-size: 0.95rem;
+            .modal {
+                padding: 24px 18px;
             }
-            .timer-box .label {
-                font-size: 0.5rem;
+            .modal .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .brand {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -1128,499 +592,402 @@
     <!-- HEADER -->
     <header>
         <div class="container header-inner">
-            <div style="display:flex;align-items:center;gap:8px;">
-                <button class="mobile-toggle" id="mobileToggle" aria-label="menu"><i class="fas fa-bars"></i></button>
-                <a class="brand" href="#"><i class="fas fa-store-alt"></i><span>Nexus<span class="accent">Shop</span></span></a>
+            <div class="brand">
+                <i class="fas fa-check-circle"></i>
+                <span>Flow<span class="accent">Board</span></span>
             </div>
-
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#categories"><i class="fas fa-th-large"></i> Categories</a></li>
-                    <li><a href="#products"><i class="fas fa-fire"></i> Trending</a></li>
-                    <li><a href="#deals"><i class="fas fa-tag"></i> Deals</a></li>
-                    <li><a href="#testimonials"><i class="fas fa-star"></i> Reviews</a></li>
-                </ul>
-            </nav>
-
-            <div style="display:flex;align-items:center;gap:10px;">
-                <div class="search-wrap">
-                    <input type="search" id="searchInput" placeholder="Search..." aria-label="Search" />
-                    <button id="searchBtn"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="header-actions">
-                    <button class="icon-btn" aria-label="account"><i class="far fa-user"></i></button>
-                    <button class="icon-btn" aria-label="wishlist"><i class="far fa-heart"></i></button>
-                    <div class="cart-wrap">
-                        <button class="icon-btn" id="cartBtn"><i class="fas fa-shopping-bag"></i></button>
-                        <span class="cart-count" id="cartCount">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- mobile menu -->
-        <div id="mobileMenu">
-            <div class="container">
-                <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#categories"><i class="fas fa-th-large"></i> Categories</a></li>
-                    <li><a href="#products"><i class="fas fa-fire"></i> Trending</a></li>
-                    <li><a href="#deals"><i class="fas fa-tag"></i> Deals</a></li>
-                    <li><a href="#testimonials"><i class="fas fa-star"></i> Reviews</a></li>
-                    <li><a href="#"><i class="far fa-user"></i> Account</a></li>
-                    <li><a href="#"><i class="far fa-heart"></i> Wishlist</a></li>
-                </ul>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="openAddTask"><i class="fas fa-plus"></i> New task</button>
+                <button class="btn btn-outline" id="clearCompletedBtn"><i class="fas fa-trash-alt"></i> Clear done</button>
             </div>
         </div>
     </header>
 
     <!-- MAIN -->
-    <main>
+    <main class="container">
 
-        <!-- HERO -->
-        <section class="hero">
-            <div class="container">
-                <div class="tag"><i class="fas fa-sparkles"></i> new collection 2026</div>
-                <h1>Elevate your everyday</h1>
-                <p>Curated essentials – fashion, tech, and accessories. Free shipping on first order.</p>
-                <div class="actions">
-                    <button class="btn btn-primary" id="shopNow"><i class="fas fa-arrow-right"></i> Shop now</button>
-                    <button class="btn btn-outline-light" id="exploreDeals"><i class="fas fa-clock"></i> Explore deals</button>
-                </div>
+        <!-- STATS -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-list-ul"></i></div>
+                <div class="info"><div class="num" id="totalTasks">0</div><div class="label">Total</div></div>
             </div>
-        </section>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-circle-check"></i></div>
+                <div class="info"><div class="num" id="completedTasks">0</div><div class="label">Completed</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-clock"></i></div>
+                <div class="info"><div class="num" id="pendingTasks">0</div><div class="label">Pending</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-flag"></i></div>
+                <div class="info"><div class="num" id="highPriorityCount">0</div><div class="label">High priority</div></div>
+            </div>
+        </div>
 
-        <!-- CATEGORIES -->
-        <section class="section" id="categories">
-            <div class="container">
-                <div class="section-header">
-                    <div class="title-group">
-                        <h2>Categories</h2>
-                        <p>Shop by interest</p>
-                    </div>
-                    <a href="#" class="view-all">All <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="categories-grid" id="categoriesGrid"></div>
+        <!-- CONTROLS -->
+        <div class="task-controls">
+            <div class="search-wrap">
+                <input type="text" id="searchInput" placeholder="Search tasks..." aria-label="Search" />
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
             </div>
-        </section>
+            <div class="filter-group" id="filterGroup">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="done">Done</button>
+                <button class="filter-btn" data-filter="high">High</button>
+            </div>
+        </div>
 
-        <!-- PRODUCTS -->
-        <section class="section" id="products">
-            <div class="container">
-                <div class="section-header">
-                    <div class="title-group">
-                        <h2>Trending now</h2>
-                        <p>Popular picks from our community</p>
-                    </div>
-                    <a href="#" class="view-all">View all <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="products-grid" id="productsGrid"></div>
-            </div>
-        </section>
-
-        <!-- DEAL -->
-        <section class="section" id="deals">
-            <div class="container">
-                <div class="section-header">
-                    <div class="title-group">
-                        <h2>⚡ Flash deal</h2>
-                        <p>Limited stock – grab it now</p>
-                    </div>
-                </div>
-                <div class="deal-wrap">
-                    <div class="deal-img">
-                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" alt="MacBook Air M2" loading="lazy">
-                    </div>
-                    <div class="deal-content">
-                        <span class="tag"><i class="fas fa-bolt"></i> limited offer</span>
-                        <h3>MacBook Air M2</h3>
-                        <p class="desc">Thin, light, and incredibly powerful.</p>
-                        <div>
-                            <span class="price-big">$999 <span class="old">$1,199</span></span>
-                        </div>
-                        <p class="stock">Only <strong>12</strong> items left</p>
-                        <div class="timer-grid" id="dealTimer">
-                            <div class="timer-box"><div class="num" id="dealDays">0</div><div class="label">Days</div></div>
-                            <div class="timer-box"><div class="num" id="dealHours">00</div><div class="label">Hrs</div></div>
-                            <div class="timer-box"><div class="num" id="dealMinutes">00</div><div class="label">Min</div></div>
-                            <div class="timer-box"><div class="num" id="dealSeconds">00</div><div class="label">Sec</div></div>
-                        </div>
-                        <button class="btn btn-primary" id="buyDeal"><i class="fas fa-cart-plus"></i> Add to cart</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TESTIMONIALS -->
-        <section class="section" id="testimonials">
-            <div class="container">
-                <div class="section-header">
-                    <div class="title-group">
-                        <h2>What customers say</h2>
-                        <p>Real reviews from real people</p>
-                    </div>
-                </div>
-                <div class="testimonials-scroll" id="testimonialsList"></div>
-            </div>
-        </section>
-
-        <!-- NEWSLETTER -->
-        <section class="section">
-            <div class="container">
-                <div class="newsletter-wrap">
-                    <div class="text">
-                        <h3>Stay in the loop</h3>
-                        <p>Exclusive offers &amp; early access</p>
-                    </div>
-                    <form id="newsletterForm" onsubmit="return false;">
-                        <input type="email" id="newsletterEmail" placeholder="Your email" aria-label="Email" required />
-                        <button class="btn" id="subscribeBtn"><i class="fas fa-paper-plane"></i> Subscribe</button>
-                        <div id="newsletterMsg"></div>
-                    </form>
-                </div>
-            </div>
-        </section>
+        <!-- TASK LIST -->
+        <div class="task-list" id="taskList"></div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="brand-col">
-                    <div class="brand"><i class="fas fa-store-alt"></i><span>Nexus<span class="accent">Shop</span></span></div>
-                    <p>Modern e‑commerce demo – quality products, seamless experience.</p>
-                    <div class="socials">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    <!-- ADD / EDIT MODAL -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">New task</h3>
+                <button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="taskForm" onsubmit="return false;">
+                <label for="taskTitle">Title</label>
+                <input type="text" id="taskTitle" placeholder="Write a task..." required />
+
+                <label for="taskDesc">Description (optional)</label>
+                <textarea id="taskDesc" placeholder="Add details…"></textarea>
+
+                <div class="form-row">
+                    <div>
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="taskDue">Due date</label>
+                        <input type="date" id="taskDue" />
                     </div>
                 </div>
-                <div class="col"><h5>Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Blog</a></li></ul></div>
-                <div class="col"><h5>Support</h5><ul><li><a href="#">Help Center</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
-                <div class="col"><h5>Legal</h5><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Cookies</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">&copy; <span id="year"></span> NexusShop. All rights reserved.</div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="cancelModal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveTaskBtn"><i class="fas fa-save"></i> Save</button>
+                </div>
+            </form>
         </div>
-    </footer>
+    </div>
 
     <!-- SCRIPT -->
     <script>
         // ============================================================
         // DATA
         // ============================================================
-        const CATEGORIES = [
-            { id: 'phones', name: 'Smartphones', icon: 'fa-mobile-alt', count: 24 },
-            { id: 'laptops', name: 'Laptops', icon: 'fa-laptop', count: 18 },
-            { id: 'clothing', name: 'Clothing', icon: 'fa-tshirt', count: 42 },
-            { id: 'gadgets', name: 'Gadgets', icon: 'fa-headphones', count: 31 },
-            { id: 'footwear', name: 'Footwear', icon: 'fa-shoe-prints', count: 27 },
-            { id: 'accessories', name: 'Accessories', icon: 'fa-watch', count: 39 }
-        ];
-
-        const PRODUCTS = [
-            { id: 1, title: 'iPhone 14 Pro Max', price: 1099, oldPrice: 1199, rating: 5, reviews: 128, badge: 'New',
-                img: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=600&q=80',
-                category: 'Smartphones' },
-            { id: 2, title: 'MacBook Pro 14"', price: 1999, rating: 4, reviews: 86, badge: '',
-                img: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80',
-                category: 'Laptops' },
-            { id: 3, title: 'Apple Watch Series 8', price: 349, oldPrice: 399, rating: 5, reviews: 214, badge: 'Sale',
-                img: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=600&q=80',
-                category: 'Accessories' },
-            { id: 4, title: 'Nike Air Max 270', price: 150, rating: 4, reviews: 53, badge: '',
-                img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80',
-                category: 'Footwear' },
-            { id: 5, title: 'Sony A7 IV Camera', price: 2499, rating: 5, reviews: 42, badge: 'New',
-                img: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80',
-                category: 'Gadgets' },
-            { id: 6, title: 'Chanel No. 5', price: 120, rating: 5, reviews: 189, badge: '',
-                img: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=600&q=80',
-                category: 'Accessories' },
-            { id: 7, title: 'Travel Backpack', price: 79, oldPrice: 99, rating: 4, reviews: 67, badge: 'Sale',
-                img: 'https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=600&q=80',
-                category: 'Accessories' },
-            { id: 8, title: 'Sony WH-1000XM5', price: 399, rating: 5, reviews: 156, badge: '',
-                img: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80',
-                category: 'Gadgets' }
-        ];
-
-        const TESTIMONIALS = [{
-            name: 'Ava Martin',
-            role: 'Verified buyer',
-            avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80',
-            text: 'Fast shipping, excellent support. Product exceeded expectations.',
-            stars: 5
-        }, {
-            name: 'Michael Lee',
-            role: 'Frequent shopper',
-            avatar: 'https://images.unsplash.com/photo-1546456073-6712f79251bb?auto=format&fit=crop&w=80&q=80',
-            text: 'Great selection and seamless checkout. Will buy again.',
-            stars: 4
-        }, {
-            name: 'Sophia Chen',
-            role: 'Designer',
-            avatar: 'https://images.unsplash.com/photo-1494790108378-be9c29b29330?auto=format&fit=crop&w=80&q=80',
-            text: 'Beautiful quality and packaging. Everything arrived perfect.',
-            stars: 5
-        }, {
-            name: 'James Wilson',
-            role: 'Tech enthusiast',
-            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80',
-            text: 'Unbeatable prices on electronics. The M2 deal was amazing.',
-            stars: 5
-        }];
-
-        // ============================================================
-        // STATE
-        // ============================================================
-        let cartCount = 0;
+        let tasks = [];
+        let currentFilter = 'all';
+        let editingId = null;
 
         // ============================================================
         // DOM REFS
         // ============================================================
-        const categoriesGrid = document.getElementById('categoriesGrid');
-        const productsGrid = document.getElementById('productsGrid');
-        const cartCountEl = document.getElementById('cartCount');
+        const taskList = document.getElementById('taskList');
+        const totalEl = document.getElementById('totalTasks');
+        const completedEl = document.getElementById('completedTasks');
+        const pendingEl = document.getElementById('pendingTasks');
+        const highPriorityEl = document.getElementById('highPriorityCount');
+
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const newsletterForm = document.getElementById('newsletterForm');
-        const newsletterEmail = document.getElementById('newsletterEmail');
-        const newsletterMsg = document.getElementById('newsletterMsg');
-        const testimonialsList = document.getElementById('testimonialsList');
-
-        // ============================================================
-        // RENDER
-        // ============================================================
-        function renderCategories() {
-            categoriesGrid.innerHTML = '';
-            CATEGORIES.forEach(c => {
-                const el = document.createElement('div');
-                el.className = 'cat-card';
-                el.innerHTML = `
-                    <div class="icon-wrap"><i class="fas ${c.icon}"></i></div>
-                    <h4>${c.name}</h4>
-                    <div class="count">${c.count} items</div>
-                `;
-                el.addEventListener('click', () => {
-                    searchInput.value = c.name;
-                    filterProducts(c.name);
-                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-                });
-                categoriesGrid.appendChild(el);
-            });
-        }
-
-        function renderProducts(list) {
-            productsGrid.innerHTML = '';
-            if (!list.length) {
-                productsGrid.innerHTML =
-                    `<p style="grid-column:1/-1;text-align:center;padding:32px;color:var(--text-muted);">No products found.</p>`;
-                return;
-            }
-            list.forEach(p => {
-                const el = document.createElement('article');
-                el.className = 'product-card';
-                const badgeClass = p.badge === 'Sale' ? 'sale' : '';
-                const badgeHtml = p.badge ? `<span class="badge ${badgeClass}">${p.badge}</span>` : '';
-                const oldPriceHtml = p.oldPrice ? `<span class="old-price">$${p.oldPrice.toLocaleString()}</span>` :
-                '';
-                const stars = '★'.repeat(Math.round(p.rating)) + '☆'.repeat(5 - Math.round(p.rating));
-                el.innerHTML = `
-                    <div class="img-wrap">
-                        <img src="${p.img}" alt="${p.title}" loading="lazy">
-                        ${badgeHtml}
-                        <button class="wish-btn" aria-label="wishlist"><i class="far fa-heart"></i></button>
-                    </div>
-                    <div class="body">
-                        <div class="category-tag">${p.category}</div>
-                        <h5>${p.title}</h5>
-                        <div class="price-row">
-                            <span class="price">$${p.price.toLocaleString()}</span>
-                            ${oldPriceHtml}
-                        </div>
-                        <div class="rating">${stars} <span>(${p.reviews})</span></div>
-                    </div>
-                    <div class="footer">
-                        <button class="add-btn" data-id="${p.id}"><i class="fas fa-cart-plus"></i> Add</button>
-                    </div>
-                `;
-                productsGrid.appendChild(el);
-            });
-
-            productsGrid.querySelectorAll('.add-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    addToCart(Number(this.dataset.id), this);
-                });
-            });
-        }
-
-        function renderTestimonials() {
-            testimonialsList.innerHTML = '';
-            TESTIMONIALS.forEach(t => {
-                const stars = '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars);
-                const el = document.createElement('div');
-                el.className = 'testimonial-card';
-                el.innerHTML = `
-                    <div class="stars">${stars}</div>
-                    <blockquote>“${t.text}”</blockquote>
-                    <div class="author">
-                        <img class="avatar" src="${t.avatar}" alt="${t.name}" loading="lazy">
-                        <div><div class="name">${t.name}</div><div class="role">${t.role}</div></div>
-                    </div>
-                `;
-                testimonialsList.appendChild(el);
-            });
-        }
+        const filterGroup = document.getElementById('filterGroup');
+        const modal = document.getElementById('taskModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const taskForm = document.getElementById('taskForm');
+        const taskTitle = document.getElementById('taskTitle');
+        const taskDesc = document.getElementById('taskDesc');
+        const taskPriority = document.getElementById('taskPriority');
+        const taskDue = document.getElementById('taskDue');
+        const saveBtn = document.getElementById('saveTaskBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelModal = document.getElementById('cancelModal');
+        const openAddBtn = document.getElementById('openAddTask');
+        const clearCompletedBtn = document.getElementById('clearCompletedBtn');
 
         // ============================================================
         // HELPERS
         // ============================================================
-        function updateCartCount() {
-            cartCountEl.textContent = cartCount;
-            cartCountEl.style.transform = 'scale(1.3)';
-            setTimeout(() => cartCountEl.style.transform = 'scale(1)', 200);
+        function generateId() { return Date.now() + Math.random().toString(36).slice(2, 6); }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
-        function addToCart(id, btnEl) {
-            const p = PRODUCTS.find(x => x.id === id);
-            if (!p) return;
-            cartCount++;
-            updateCartCount();
-            if (btnEl) {
-                const orig = btnEl.innerHTML;
-                btnEl.innerHTML = '<i class="fas fa-check"></i> Added';
-                btnEl.classList.add('added');
-                setTimeout(() => {
-                    btnEl.innerHTML = orig;
-                    btnEl.classList.remove('added');
-                }, 1400);
-            }
-            const cartBtn = document.getElementById('cartBtn');
-            cartBtn.style.color = 'var(--accent)';
-            setTimeout(() => cartBtn.style.color = '', 400);
-        }
-
-        function filterProducts(query) {
-            const q = String(query || '').trim().toLowerCase();
-            if (!q) { renderProducts(PRODUCTS); return; }
-            const filtered = PRODUCTS.filter(p =>
-                p.title.toLowerCase().includes(q) ||
-                p.category.toLowerCase().includes(q)
-            );
-            renderProducts(filtered);
+        function getPriorityLabel(p) {
+            return p.charAt(0).toUpperCase() + p.slice(1);
         }
 
         // ============================================================
-        // DEAL TIMER
+        // RENDER
         // ============================================================
-        (function setupDealTimer() {
-            const now = new Date();
-            const target = new Date(now.getTime() + (24 * 60 + 36) * 60 * 1000);
+        function render() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            let filtered = tasks;
 
-            function tick() {
-                const diff = target - new Date();
-                if (diff <= 0) {
-                    document.getElementById('dealDays').textContent = '0';
-                    document.getElementById('dealHours').textContent = '00';
-                    document.getElementById('dealMinutes').textContent = '00';
-                    document.getElementById('dealSeconds').textContent = '00';
-                    return;
-                }
-                const days = Math.floor(diff / (24 * 3600 * 1000));
-                const hours = Math.floor((diff % (24 * 3600 * 1000)) / (3600 * 1000));
-                const mins = Math.floor((diff % (3600 * 1000)) / (60 * 1000));
-                const secs = Math.floor((diff % (60 * 1000)) / 1000);
-                document.getElementById('dealDays').textContent = days;
-                document.getElementById('dealHours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('dealMinutes').textContent = String(mins).padStart(2, '0');
-                document.getElementById('dealSeconds').textContent = String(secs).padStart(2, '0');
+            // filter
+            if (currentFilter === 'active') filtered = filtered.filter(t => !t.done);
+            else if (currentFilter === 'done') filtered = filtered.filter(t => t.done);
+            else if (currentFilter === 'high') filtered = filtered.filter(t => t.priority === 'high');
+
+            // search
+            if (searchTerm) {
+                filtered = filtered.filter(t =>
+                    t.title.toLowerCase().includes(searchTerm) ||
+                    (t.description && t.description.toLowerCase().includes(searchTerm))
+                );
             }
-            tick();
-            setInterval(tick, 1000);
-        })();
+
+            // sort: pending first, then by priority high→low, then by date
+            filtered.sort((a, b) => {
+                if (a.done !== b.done) return a.done ? 1 : -1;
+                const order = { high: 0, medium: 1, low: 2 };
+                if (order[a.priority] !== order[b.priority]) return order[a.priority] - order[b.priority];
+                return new Date(a.created) - new Date(b.created);
+            });
+
+            // render list
+            if (filtered.length === 0) {
+                taskList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h4>No tasks here</h4>
+                        <p>Add a new task to get started.</p>
+                    </div>
+                `;
+            } else {
+                taskList.innerHTML = filtered.map(t => `
+                    <div class="task-item" data-id="${t.id}">
+                        <button class="check ${t.done ? 'done' : ''}" data-id="${t.id}" aria-label="toggle done">
+                            ${t.done ? '<i class="fas fa-check"></i>' : ''}
+                        </button>
+                        <div class="task-body">
+                            <div class="title ${t.done ? 'done' : ''}">${escapeHtml(t.title)}</div>
+                            <div class="meta">
+                                ${t.description ? `<span><i class="fas fa-align-left"></i> ${escapeHtml(t.description)}</span>` : ''}
+                                <span><i class="fas fa-flag"></i> ${getPriorityLabel(t.priority)}</span>
+                                ${t.due ? `<span><i class="far fa-calendar-alt"></i> ${formatDate(t.due)}</span>` : ''}
+                                ${t.done ? '<span style="color:#2e7d5e;"><i class="fas fa-check-circle"></i> Done</span>' : ''}
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="edit-btn" data-id="${t.id}" aria-label="edit"><i class="fas fa-pen"></i></button>
+                            <button class="delete-btn" data-id="${t.id}" aria-label="delete"><i class="fas fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // update stats
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.done).length;
+            const pending = total - completed;
+            const high = tasks.filter(t => t.priority === 'high').length;
+
+            totalEl.textContent = total;
+            completedEl.textContent = completed;
+            pendingEl.textContent = pending;
+            highPriorityEl.textContent = high;
+
+            // attach events
+            document.querySelectorAll('.check').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTask(btn.dataset.id);
+                });
+            });
+
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openEdit(btn.dataset.id);
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteTask(btn.dataset.id);
+                });
+            });
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return String(text).replace(/[&<>"]/g, s => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;'
+            } [s]));
+        }
+
+        // ============================================================
+        // CRUD
+        // ============================================================
+        function addTask(title, description, priority, due) {
+            tasks.push({
+                id: generateId(),
+                title: title.trim(),
+                description: description.trim(),
+                priority: priority || 'medium',
+                due: due || '',
+                done: false,
+                created: new Date().toISOString()
+            });
+            render();
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.done = !task.done;
+                render();
+            }
+        }
+
+        function deleteTask(id) {
+            if (confirm('Delete this task?')) {
+                tasks = tasks.filter(t => t.id !== id);
+                render();
+            }
+        }
+
+        function clearCompleted() {
+            const hasDone = tasks.some(t => t.done);
+            if (!hasDone) return alert('No completed tasks to clear.');
+            if (confirm('Remove all completed tasks?')) {
+                tasks = tasks.filter(t => !t.done);
+                render();
+            }
+        }
+
+        function openEdit(id) {
+            const task = tasks.find(t => t.id === id);
+            if (!task) return;
+            editingId = id;
+            modalTitle.textContent = 'Edit task';
+            taskTitle.value = task.title;
+            taskDesc.value = task.description || '';
+            taskPriority.value = task.priority;
+            taskDue.value = task.due || '';
+            saveBtn.textContent = 'Update';
+            modal.classList.add('open');
+        }
+
+        function resetModal() {
+            editingId = null;
+            modalTitle.textContent = 'New task';
+            taskTitle.value = '';
+            taskDesc.value = '';
+            taskPriority.value = 'medium';
+            taskDue.value = '';
+            saveBtn.textContent = 'Save';
+            modal.classList.remove('open');
+        }
 
         // ============================================================
         // EVENTS
         // ============================================================
-        searchBtn.addEventListener('click', () => filterProducts(searchInput.value));
-        searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') filterProducts(e.target.value); });
-
-        mobileToggle.addEventListener('click', () => {
-            const isOpen = mobileMenu.style.display === 'block';
-            mobileMenu.style.display = isOpen ? 'none' : 'block';
-            mobileToggle.innerHTML = isOpen ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        // open add
+        openAddBtn.addEventListener('click', () => {
+            resetModal();
+            modal.classList.add('open');
         });
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.style.display = 'none';
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        // close modal
+        closeModal.addEventListener('click', resetModal);
+        cancelModal.addEventListener('click', resetModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) resetModal();
+        });
+
+        // save task
+        taskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = taskTitle.value.trim();
+            if (!title) return alert('Please enter a title.');
+
+            if (editingId) {
+                const task = tasks.find(t => t.id === editingId);
+                if (task) {
+                    task.title = title;
+                    task.description = taskDesc.value.trim();
+                    task.priority = taskPriority.value;
+                    task.due = taskDue.value;
+                }
+                render();
+                resetModal();
+            } else {
+                addTask(title, taskDesc.value.trim(), taskPriority.value, taskDue.value);
+                resetModal();
+            }
+        });
+
+        // search
+        searchBtn.addEventListener('click', () => render());
+        searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') render(); });
+
+        // filters
+        filterGroup.addEventListener('click', (e) => {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+            filterGroup.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+            render();
+        });
+
+        // clear completed
+        clearCompletedBtn.addEventListener('click', clearCompleted);
+
+        // keyboard shortcut: Escape closes modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) resetModal();
+        });
+
+        // ============================================================
+        // INIT – seed with sample tasks
+        // ============================================================
+        const sampleTasks = [
+            { title: 'Design homepage mockup', description: 'Figma — dark mode variant', priority: 'high',
+                due: '2026-09-10' },
+            { title: 'Review Q3 performance', description: 'Prepare slides for team meeting', priority: 'medium',
+                due: '2026-09-15' },
+            { title: 'Update project roadmap', description: 'Include new milestones', priority: 'medium',
+            due: '2026-09-08' },
+            { title: 'Write monthly newsletter', description: 'Draft content + schedule', priority: 'low',
+            due: '2026-09-20' },
+            { title: 'Refactor auth module', description: 'Improve token handling', priority: 'high', due: '2026-09-12' },
+        ];
+
+        sampleTasks.forEach(t => {
+            tasks.push({
+                id: generateId(),
+                title: t.title,
+                description: t.description,
+                priority: t.priority,
+                due: t.due,
+                done: false,
+                created: new Date().toISOString()
             });
         });
 
-        document.getElementById('shopNow').addEventListener('click', () => {
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-        });
-        document.getElementById('exploreDeals').addEventListener('click', () => {
-            document.getElementById('deals').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        document.getElementById('buyDeal').addEventListener('click', function() {
-            cartCount++;
-            updateCartCount();
-            const orig = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-check"></i> Added!';
-            this.style.background = '#2a9d8f';
-            setTimeout(() => {
-                this.innerHTML = orig;
-                this.style.background = '';
-            }, 1500);
-        });
-
-        document.getElementById('cartBtn').addEventListener('click', () => {
-            alert(`🛒 Your cart has ${cartCount} item${cartCount !== 1 ? 's' : ''}.`);
-        });
-
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = newsletterEmail.value.trim();
-            if (!email || !email.includes('@')) {
-                newsletterMsg.textContent = 'Please enter a valid email.';
-                newsletterMsg.style.color = '#ffb3b3';
-                newsletterMsg.style.display = 'block';
-                return;
-            }
-            newsletterMsg.textContent = '🎉 Thanks for subscribing!';
-            newsletterMsg.style.color = '#a8e6cf';
-            newsletterMsg.style.display = 'block';
-            newsletterEmail.value = '';
-            setTimeout(() => newsletterMsg.style.display = 'none', 3400);
-        });
-
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // ============================================================
-        // INIT
-        // ============================================================
-        renderCategories();
-        renderProducts(PRODUCTS);
-        renderTestimonials();
-        updateCartCount();
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                mobileMenu.style.display = 'none';
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-
-        console.log('✨ NexusShop – user‑friendly experience loaded.');
+        render();
+        console.log('📋 FlowBoard – task manager ready.');
     </script>
 
 </body>

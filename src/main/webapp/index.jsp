@@ -674,12 +674,12 @@
           <li class="task">
             <label class="check">
               <input type="checkbox" aria-label="Mark 'Reply to client emails' as done">
-              <span class="box" aria-hidden="true"><em class="fa-solid fa-check"></i></span>
+              <span class="box" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
             </label>
             <div class="task-body">
               <div class="task-title">Reply to client emails</div>
               <div class="task-meta">
-                <span><em class="fa-regular fa-clock" aria-hidden="true"></i> 2:00 PM</span>
+                <span><i class="fa-regular fa-clock" aria-hidden="true"></i> 2:00 PM</span>
                 <span class="chip low">Low</span>
               </div>
             </div>
